@@ -1,0 +1,28 @@
+# Credentials — NEVER commit
+*.json
+**/bigquery-keyfile.json
+.dbt/
+
+# dbt artifacts
+flowtv_dbt/target/
+flowtv_dbt/dbt_packages/
+flowtv_dbt/logs/
+flowtv_dbt/.user.yml
+
+# Large generated data (regenerate via python script)
+data/
+*.csv
+
+# Tableau extract/temp files
+*.hyper
+*.twbr
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+# Exception: keep the dbt seed (small reference data)
+
+# Tableau workbooks (live on Tableau Public instead)
+tableau/*.twbx

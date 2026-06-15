@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: flowtv_raw
+    description: "Raw FlowTV data loaded from generated CSVs into BigQuery."
+    database: flowtv-analytics    # GCP project ID (dash). Change if yours has a suffix.
+    schema: flowtv_raw            # BigQuery dataset holding raw tables (underscore).
+    tables:
+      - name: users
+      - name: plans
+      - name: content_catalog
+      - name: subscriptions
+      - name: sessions
+      - name: events
+      - name: content_views
+      - name: experiments
+      - name: experiment_assignments

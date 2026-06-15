@@ -1,0 +1,66 @@
+version: 2
+
+models:
+  - name: mart_acquisition
+    description: >
+      User-grain acquisition mart (replaces vw_acquisition). One row per user
+      with funnel-stage flags, first-subscription details, plan, and channel CAC.
+    columns:
+      - name: user_id
+        description: "Unique user identifier."
+        data_tests: [unique, not_null]
+      - name: acquisition_channel
+        description: "Channel that acquired the user."
+        data_tests: [not_null]
+      - name: channel_cac
+        description: "Customer acquisition cost for the channel (from channel_cac seed)."
+      - name: reached_paid
+        description: "1 if the user reached the 'subscribed' funnel event."
+
+  - name: mart_engagement
+    description: >
+      User-day grain engagement mart (replaces vw_engagement). cohort_month is the
+      month of the user's first session; retention_bucket and engagement_tier match
+      the original view logic.
+    columns:
+      - name: user_id
+        description: "User who had the session."
+        data_tests: [not_null]
+      - name: cohort_month
+        description: "Month of the user's first session; cohort grouping key."
+        data_tests: [not_null]
+      - name: retention_bucket
+        description: "D0 / D1-6 / D7-13 / D14-29 / D30-59 / D60-89 / D90+ bucket."
+      - name: engagement_tier
+        description: "power_user (120+ min/day), regular (30-120), or casual (<30)."
+
+  - name: mart_economics
+    description: >
+      Subscription-month grain economics mart (replaces vw_economics). One row per
+      paid subscription per active month, with MRR, channel CAC, and tenure.
+    columns:
+      - name: subscription_id
+        description: "Subscription identifier."
+        data_tests: [not_null]
+      - name: active_month
+        description: "Month for which the subscription was active."
+        data_tests: [not_null]
+      - name: mrr
+        description: "Monthly recurring revenue for this subscription."
+      - name: tenure_months
+        description: "Months since the subscription started."
+
+  - name: mart_experiments
+    description: >
+      Experiment-user grain mart (replaces vw_experiments). One row per user per
+      experiment with conversion and retention outcomes plus revenue_per_assigned.
+    columns:
+      - name: user_id
+        description: "Assigned user."
+        data_tests: [not_null]
+      - name: experiment_id
+        description: "Experiment identifier."
+        data_tests: [not_null]
+      - name: is_control
+        description: "Whether the user was in the control group."
+        data_tests: [not_null]

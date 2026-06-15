@@ -1,0 +1,12 @@
+version: 2
+
+seeds:
+  - name: channel_cac
+    description: "Per-channel customer acquisition cost lookup. Replaces the inline CASE statement from the original SQL views."
+    columns:
+      - name: acquisition_channel
+        description: "Marketing channel name."
+        data_tests: [unique, not_null]
+      - name: channel_cac
+        description: "Customer acquisition cost in USD for the channel."
+        data_tests: [not_null]

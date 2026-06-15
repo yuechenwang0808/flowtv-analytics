@@ -1,0 +1,96 @@
+version: 2
+
+models:
+  - name: stg_users
+    description: "Cleaned user records, one row per user."
+    columns:
+      - name: user_id
+        description: "Unique user identifier."
+        data_tests: [unique, not_null]
+      - name: acquisition_channel
+        description: "Marketing channel that acquired the user."
+        data_tests:
+          - accepted_values:
+              values: ['organic','paid_search','paid_social','email','referral','affiliate','display']
+      - name: signup_date
+        description: "Date the user signed up."
+        data_tests: [not_null]
+
+  - name: stg_plans
+    description: "Subscription plan catalog, one row per plan."
+    columns:
+      - name: plan_id
+        description: "Unique plan identifier."
+        data_tests: [unique, not_null]
+      - name: price_monthly
+        description: "Monthly price of the plan in USD."
+
+  - name: stg_subscriptions
+    description: "Subscription records, one row per subscription."
+    columns:
+      - name: subscription_id
+        description: "Unique subscription identifier."
+        data_tests: [unique, not_null]
+      - name: user_id
+        description: "User who owns the subscription."
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_users')
+              field: user_id
+      - name: status
+        description: "Current subscription status."
+        data_tests:
+          - accepted_values:
+              values: ['active','churned','trial_expired','trialing']
+
+  - name: stg_sessions
+    description: "User viewing sessions, one row per session."
+    columns:
+      - name: session_id
+        description: "Unique session identifier."
+        data_tests: [unique, not_null]
+      - name: user_id
+        description: "User who had the session."
+        data_tests: [not_null]
+
+  - name: stg_content_catalog
+    description: "Content catalog, one row per title."
+    columns:
+      - name: content_id
+        description: "Unique content identifier."
+        data_tests: [unique, not_null]
+
+  - name: stg_events
+    description: "Product events, one row per event."
+    columns:
+      - name: event_id
+        description: "Unique event identifier."
+        data_tests: [unique, not_null]
+
+  - name: stg_content_views
+    description: "Content view records, one row per view."
+    columns:
+      - name: view_id
+        description: "Unique view identifier."
+        data_tests: [unique, not_null]
+
+  - name: stg_experiments
+    description: "Experiment metadata, one row per experiment-variant."
+    columns:
+      - name: experiment_id
+        description: "Experiment identifier."
+        data_tests: [not_null]
+      - name: is_control
+        description: "Whether this variant is the control group."
+        data_tests: [not_null]
+
+  - name: stg_experiment_assignments
+    description: "User-to-variant assignments, one row per user per experiment."
+    columns:
+      - name: user_id
+        description: "Assigned user."
+        data_tests: [not_null]
+      - name: experiment_id
+        description: "Experiment the user was assigned to."
+        data_tests: [not_null]
