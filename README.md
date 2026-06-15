@@ -5,7 +5,7 @@ service. Synthetic event data flows through a modern data stack — **Python →
 dbt → Tableau** — to produce four executive dashboards covering acquisition, retention,
 subscriber economics, and A/B experimentation.
 
-**[▶ View the live dashboards on Tableau Public](TABLEAU_PUBLIC_URL_HERE)**
+**[▶ View the live dashboards on Tableau Public](https://public.tableau.com/app/profile/yuechen.wang6046/viz/FlowTVStreamingAnalyticsSuite/AcquisitionConversion)**
 
 ![Lineage Graph](docs/lineage_graph.png)
 
@@ -199,4 +199,4 @@ Built by **Yuechen Wang** as a portfolio project demonstrating end-to-end analyt
 engineering — from synthetic data generation through cloud warehousing, dbt
 transformation, and BI delivery.
 
-🔗 **[Live dashboards](TABLEAU_PUBLIC_URL_HERE)** · [LinkedIn](LINKEDIN_URL_HERE)
+🔗 **[Live dashboards](https://public.tableau.com/app/profile/yuechen.wang6046/viz/FlowTVStreamingAnalyticsSuite/AcquisitionConversion)** · [LinkedIn](https://www.linkedin.com/in/yue-chen-wang/)
